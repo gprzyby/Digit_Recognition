@@ -49,14 +49,18 @@ def brush_print(value: float, x: int, y: int):
         if 0 <= point_y < __DIGIT_SIZE:
             points.append((x, point_y))
 
-    for point_y, point_x in points:
-        display[point_x][point_y] += value
+    for point_x, point_y in points:
+        # paint center point more than other
+        if point_x == x and point_y == y:
+            display[point_y][point_x] += value
+        else:
+            display[point_y][point_x] += (value * 0.4)
 
-        if display[point_x][point_y] > 1:
-            display[point_x][point_y] = 1
+        if display[point_y][point_x] > 1:
+            display[point_y][point_x] = 1
 
-        if display[point_x][point_y] < 0:
-            display[point_x][point_y] = 0
+        if display[point_y][point_x] < 0:
+            display[point_y][point_x] = 0
 
 
 def print_neural_output():
@@ -64,7 +68,7 @@ def print_neural_output():
     node_height = __WINDOW_SIZE[1]/10.
     #half of font size for 16 in pixels
     font_size_px = 11
-    x_draw = (__DIGIT_SIZE + 1)* __PIXEL_SIZE[0]
+    x_draw = (__DIGIT_SIZE + 1) * __PIXEL_SIZE[0]
     y_draw = node_height / 2. - font_size_px
     x_bar_draw = (__DIGIT_SIZE + 3) * __PIXEL_SIZE[0]
 
@@ -116,7 +120,7 @@ if __name__ == "__main__":
             if pressedButton == 1:
                 brush_print(0.5, *mapPos)
 
-            if pressedButton == 2:
+            if pressedButton == 3:
                 brush_print(-0.7, *mapPos)
 
         # printing section

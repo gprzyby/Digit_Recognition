@@ -62,6 +62,7 @@ if __name__ == "__main__":
 
     neural_network.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
+
     #teaching neural network
     neural_network.fit(train_images, train_labels, epochs=10)
     neural_network.save('image_recog.h5')
